@@ -3,7 +3,7 @@ import json, os
 
 OUTPUT_DIR: str = 'logs'
 
-OUTPUT_FILE: str = f'{OUTPUT_DIR}/logs.jsonl'
+OUTPUT_FILE: str = f'{OUTPUT_DIR}/'
 
 class ResponseLogger:
     def __init__(self, fname):
@@ -24,7 +24,7 @@ class ResponseLogger:
 
         json_string: str = json.dumps(log_entry)
 
-        with open(self.fname, "a") as af:
+        with open(os.path.join(OUTPUT_FILE, self.fname), "a") as af:
             af.write(json_string)
             af.write('\n')  
 
