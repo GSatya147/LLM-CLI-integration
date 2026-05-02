@@ -1,7 +1,9 @@
-INPUT_PRICE = 0.50
-OUTPUT_PRICE = 3.00
+INPUT_PRICE: float = 0.50
+OUTPUT_PRICE: float = 3.00
+MILLION: float = 1_000_000
 
-def calculate_costing(input_tokens, output_tokens):
-    return (input_tokens * INPUT_PRICE + output_tokens * OUTPUT_PRICE)
+def calculate_costing(input_tokens: int, output_tokens: int) -> float:
+    return (((input_tokens/MILLION) * INPUT_PRICE) + ((output_tokens/MILLION) * OUTPUT_PRICE))
 
-print(calculate_costing(1, 5))
+if __name__=="__main__":
+    print(calculate_costing(200, 5000))
