@@ -6,7 +6,10 @@ from rich.console import Console
 TOTAL_COST: float = 0.00
 TOTAL_TOKENS: int = 0
 
+STATUS = None
+
 console = Console()
+logger = ResponseLogger('logs.jsonl')
 
 while True:
     try:
@@ -22,6 +25,8 @@ while True:
 
         if option == 1:
             while True:
+                input_tokens: int = 0
+                output_tokens: int = 0
                 try:
                     print(f"{'-' * 100}")
                     user_msg = input(">> ")
@@ -41,8 +46,6 @@ while True:
                     TOTAL_COST += calculate_costing(input_tokens, output_tokens)
                     TOTAL_TOKENS += last_chunk.usage_metadata.total_token_count
                     
-                    print(last_chunk.usage_metadata)
-
                     STATUS = "SUCCESS"
 
                 except EnvironmentError as e:
@@ -53,11 +56,12 @@ while True:
                     print("Have a nice day!")
                     break
 
+                except Exception as e:
+                    print("Error!")
+                    STATUS = 'ERROR'
 
                 finally:
-                    logger = ResponseLogger('logs.jsonl')
                     logger.log(STATUS, user_msg, input_tokens, full_response, output_tokens)
-
 
         elif option == 2:
             print(f"Total tokens usage: {TOTAL_TOKENS}")
