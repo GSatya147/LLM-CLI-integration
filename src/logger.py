@@ -12,17 +12,17 @@ class ResponseLogger:
         if not os.path.exists(OUTPUT_DIR):
             os.makedirs(OUTPUT_DIR)
 
-    def log(self, status: str, prompt: str, i_tokens: int, reponse: str, o_tokens: int) -> None:
+    def log(self, status: str, prompt: str, i_tokens: int, response: str, o_tokens: int) -> None:
         log_entry: dict = {
             'timestamp': str(datetime.now().strftime(f"%H:%M:%S %Y")),
             'status': status,
             'input': prompt,
             'input tokens': i_tokens,
-            'output': reponse,
+            'output': response,
             'output tokens': o_tokens
         }
 
-        json_string: json = json.dumps(log_entry, indent=4)
+        json_string: str = json.dumps(log_entry)
 
         with open(self.fname, "a") as af:
             af.write(json_string)
