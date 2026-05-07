@@ -32,4 +32,6 @@ jobs:
         run: black --check .
 
       - name: Run tests
+        # env:
+        #   GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }} , in github settings>secrets and variables> actions
         run: pytest tests/ -v
