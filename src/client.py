@@ -1,22 +1,3 @@
-"""
-load env
-get api key → if None, raise immediately
-
-initialise client with api key
-
-function get_response(system_prompt, user_message):
-    try:
-        call API with:
-            - model name
-            - system prompt
-            - user message
-            - streaming enabled
-        return the stream
-    except AuthError → "bad API key"
-    except RateLimitError → "slow down, retry"
-    except ConnectionError → "network issue"
-"""
-
 import os
 import time
 from google import genai
@@ -29,12 +10,13 @@ MAX_RETRIES = 3
 SYSTEM_PROMPT = "You are a finance advisor"
 
 load_dotenv()
-your_api_key = os.getenv("GEMINI_API_key")
-if not your_api_key:
-    raise EnvironmentError("Gemini Key not set, Check your .env file")
+your_api_key = os.getenv("GEMINI_API_KEY")
 
 
 def get_response(user_prompt, system_instr=SYSTEM_PROMPT):
+    if not your_api_key:
+        raise EnvironmentError("Gemini Key not set, Check your .env file")
+
     client = genai.Client(
         api_key=your_api_key,
         http_options=types.HttpOptions(
@@ -57,6 +39,8 @@ def get_response(user_prompt, system_instr=SYSTEM_PROMPT):
 
             for chunk in response_stream:
                 yield chunk
+
+            break
 
         except errors.ClientError as e:  # explore other codes like 400, 401, 404
             if e.code == 429:
