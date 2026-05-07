@@ -8,11 +8,12 @@ OUTPUT_FILE: str = f"{OUTPUT_DIR}/"
 
 
 class ResponseLogger:
-    def __init__(self, fname):
+    def __init__(self, fname, output_dir=OUTPUT_DIR):
         self.fname = fname
+        self.output_dir = output_dir
 
-        if not os.path.exists(OUTPUT_DIR):
-            os.makedirs(OUTPUT_DIR)
+        if not os.path.exists(self.output_dir):
+            os.makedirs(self.output_dir)
 
     def log(
         self, status: str, prompt: str, i_tokens: int, response: str, o_tokens: int
@@ -28,7 +29,7 @@ class ResponseLogger:
 
         json_string: str = json.dumps(log_entry)
 
-        with open(os.path.join(OUTPUT_FILE, self.fname), "a") as af:
+        with open(os.path.join(self.output_dir, self.fname), "a") as af:
             af.write(json_string)
             af.write("\n")
 
