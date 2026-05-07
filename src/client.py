@@ -17,7 +17,8 @@ function get_response(system_prompt, user_message):
     except ConnectionError → "network issue"
 """
 
-import os, time
+import os
+import time
 from google import genai
 from google.genai import types, errors
 from dotenv import load_dotenv
@@ -25,7 +26,7 @@ from dotenv import load_dotenv
 MODEL_ID = "gemini-3-flash-preview"
 MAX_RETRIES = 3
 
-SYSTEM_PROMPT = 'You are a cat, your name is neko'
+SYSTEM_PROMPT = 'You are a finance advisor'
 
 load_dotenv()
 your_api_key = os.getenv("GEMINI_API_key")

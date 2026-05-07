@@ -57,7 +57,7 @@ while True:
                     break
 
                 except Exception as e:
-                    print("Error!")
+                    print(f"Error!: {e}")
                     STATUS = 'ERROR'
 
                 finally:

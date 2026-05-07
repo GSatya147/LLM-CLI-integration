@@ -1,5 +1,6 @@
 from datetime import datetime
-import json, os
+import json
+import os
 
 OUTPUT_DIR: str = 'logs'
 
@@ -14,7 +15,7 @@ class ResponseLogger:
 
     def log(self, status: str, prompt: str, i_tokens: int, response: str, o_tokens: int) -> None:
         log_entry: dict = {
-            'timestamp': str(datetime.now().strftime(f"%H:%M:%S %Y")),
+            'timestamp': str(datetime.now().strftime("%H:%M:%S %Y")),
             'status': status,
             'input': prompt,
             'input tokens': i_tokens,
