@@ -30,3 +30,6 @@ jobs:
 
       - name: Check formatting with black # Checks code is formatted correctly. --check explicitly means only checking pass/fail
         run: black --check .
+
+      - name: Run tests
+        run: pytest tests/ -v
