@@ -1,3 +1,5 @@
 python-dotenv
 rich
 google-genai
+ruff
+black

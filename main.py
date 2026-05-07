@@ -9,19 +9,21 @@ TOTAL_TOKENS: int = 0
 STATUS = None
 
 console = Console()
-logger = ResponseLogger('logs.jsonl')
+logger = ResponseLogger("logs.jsonl")
 
 while True:
     try:
-        print(f"""
+        print(
+            f"""
         Welcome to local Gemini-3-flash preview
         {'='*50}
         1. Access Gemini-3-flash
         2. Check the tokens usage
         3. Check the cost
         4. Exit
-        """)
-        option = int(input('Select 1/2/3/4: '))
+        """
+        )
+        option = int(input("Select 1/2/3/4: "))
 
         if option == 1:
             while True:
@@ -45,7 +47,7 @@ while True:
 
                     TOTAL_COST += calculate_costing(input_tokens, output_tokens)
                     TOTAL_TOKENS += last_chunk.usage_metadata.total_token_count
-                    
+
                     STATUS = "SUCCESS"
 
                 except EnvironmentError as e:
@@ -58,10 +60,12 @@ while True:
 
                 except Exception as e:
                     print(f"Error!: {e}")
-                    STATUS = 'ERROR'
+                    STATUS = "ERROR"
 
                 finally:
-                    logger.log(STATUS, user_msg, input_tokens, full_response, output_tokens)
+                    logger.log(
+                        STATUS, user_msg, input_tokens, full_response, output_tokens
+                    )
 
         elif option == 2:
             print(f"Total tokens usage: {TOTAL_TOKENS}")
@@ -77,6 +81,4 @@ while True:
 
     except KeyboardInterrupt:
         print("\nExiting...")
-        break 
-
-
+        break
