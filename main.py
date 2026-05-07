@@ -68,7 +68,7 @@ while True:
                     )
 
         elif option == 2:
-            print(f"Total tokens usage: {TOTAL_TOKENS}")
+            print(f"Total usage: {TOTAL_TOKENS}")
 
         elif option == 3:
             print(f"Total cost: ${TOTAL_COST:.5f}")
