@@ -23,7 +23,7 @@ jobs:
           cache: "pip"
 
       - name: Install dev tools           # Installs ruff and black ont that VM
-        run: pip install ruff black==24.10.0
+        run: pip Install -r requirements.txt
 
       - name: Lint with ruff              # Runs ruff against the code. If issue: job fails.
         run: ruff check .
