@@ -10,10 +10,10 @@ MAX_RETRIES = 3
 SYSTEM_PROMPT = "You are a finance advisor"
 
 load_dotenv()
-your_api_key = os.getenv("GEMINI_API_KEY")
 
 
 def get_response(user_prompt, system_instr=SYSTEM_PROMPT):
+    your_api_key = os.getenv("GEMINI_API_KEY")
     if not your_api_key:
         raise EnvironmentError("Gemini Key not set, Check your .env file")
 
