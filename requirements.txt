@@ -2,4 +2,4 @@ python-dotenv
 rich
 google-genai
 ruff
-black
+black==24.10.0
